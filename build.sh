@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 PROG_NAME="prog"
-CC_FlAGS="std=c17 -Wall -O2"
+CC_FlAGS="std=c17 -Wall"
 
 # Directories
 SRC_DIR="src"
@@ -11,18 +11,22 @@ INC_DIR="-I/usr/include"
 LIB_DIR="-L/usr/lib"
 
 # Files
-SRC_FILE=$(find $SRC_DIR -type f -name *.c)
-LIB_FILE="-lSDL2main"
+CC_FILE=$(find $SRC_DIR -type f -name *.c)
+LIB_FILE="-lSDL2main -lSDL2"
+BIN_FILE="$BUILD_DIR/$PROG_NAME"
+
+LD_FLAGS="$INC_DIR ""$LIB_DIR ""$LIB_FILE"
 
 function build_cc () {
     mkdir -p $OBJ_DIR
     for file in $CC_FILE; do
-        gcc $CC_FLAGS -c $file -o $OBJ_DIR/$file.o
+        gcc $CC_FLAGS -c $file -o $file.o && \
+        mv $file.o $OBJ_DIR
     done
 }
 
 function build_bin () {
-    gcc $INC_DIR $LIB_DIR $LIB_FILE $OBJ_DIR/*.o -o $BUILD_DIR/$PROG_NAME
+    gcc $LD_FLAGS $OBJ_DIR/*.o -o $BIN_FILE
 }
 
 function build () {
