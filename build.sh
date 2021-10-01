@@ -1,36 +1,37 @@
 #!/bin/bash
 
 PROG_NAME="prog"
-CC_FlAGS="std=c17 -Wall"
+CXX_FlAGS="std=c++20 -Wall"
 
 # Directories
 SRC_DIR="src"
 BUILD_DIR="bin"
 OBJ_DIR="$BUILD_DIR/obj"
-INC_DIR="-I/usr/include"
+INC_DIR="-I/usr/include -I./include"
 LIB_DIR="-L/usr/lib"
 
 # Files
-CC_FILE=$(find $SRC_DIR -type f -name *.c)
-LIB_FILE="-lSDL2main -lSDL2"
+CXX_FILE=$(find $SRC_DIR -type f -name *.cpp)
+LIB_FILE="-lGL -lGLEW -lglfw"
 BIN_FILE="$BUILD_DIR/$PROG_NAME"
 
-LD_FLAGS="$INC_DIR ""$LIB_DIR ""$LIB_FILE"
+LD_FLAGS="$LIB_DIR $LIB_FILE"
 
-function build_cc () {
+function build_cxx () {
     mkdir -p $OBJ_DIR
-    for file in $CC_FILE; do
-        gcc $CC_FLAGS -c $file -o $file.o && \
+    for file in $CXX_FILE; do
+        g++ $CXX_FLAGS $INC_DIR -c $file -o $file.o && \
         mv $file.o $OBJ_DIR
     done
 }
 
 function build_bin () {
-    gcc $LD_FLAGS $OBJ_DIR/*.o -o $BIN_FILE
+    g++ $LD_FLAGS $OBJ_DIR/*.o -o $BIN_FILE
 }
 
 function build () {
-    build_cc && \
+    cleanup
+    build_cxx && \
     build_bin
 }
 
