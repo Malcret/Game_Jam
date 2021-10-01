@@ -68,7 +68,7 @@ int main(int argc, const char **argv) {
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         // Clear screen
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Get events
