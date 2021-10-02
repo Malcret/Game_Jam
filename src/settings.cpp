@@ -1,6 +1,5 @@
 #include "settings.hpp"
 
-
 settings loadSettings() {
     YAML::Node config = YAML::LoadFile("settings.yml");
     settings Sets;
@@ -8,4 +7,14 @@ settings loadSettings() {
     if (config["window_width"]) { Sets.window_width = config["window_width"].as<int>();}
     if (config["antialiasing"]) { Sets.antialiasing = config["antialiasing"].as<int>();}
     return Sets;
+}
+
+void saveSettings(settings sets) {
+    YAML::Node setsFile = YAML::LoadFile("settings.yml");
+    std::ofstream outFile("settings.yml");
+    setsFile["window_height"] = sets.window_height;
+    setsFile["window_width"] = sets.window_width;
+    setsFile["antialiasing"] = sets.antialiasing;
+    outFile << setsFile;
+    outFile.close();
 }
