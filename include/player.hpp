@@ -2,6 +2,9 @@
 #define PLAYER_HPP
 
 #include <glm/glm.hpp>
+#include <yaml-cpp/yaml.h>
+#include <fstream>
+#include <string>
 
 class Player {
 
@@ -12,6 +15,9 @@ public:
     ~Player();
 
     void set_pos(glm::vec2 pos);
+    void save();
+    void initFromSave();
+    void initStats();
     void move(glm::vec2 pos) {
         m_pos += pos;
     }
