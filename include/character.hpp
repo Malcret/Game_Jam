@@ -16,9 +16,9 @@
 
 struct __Character {
     unsigned int textureID; // ID handle of the glyph texture
-    glm::ivec2 size;      // Size of glyph
-    glm::ivec2 bearing;   // Offset from baseline to left/top of glyph
-    unsigned int advance;   // Horizontal offset to advance to next glyph
+    glm::ivec2 size; // Size of glyph
+    glm::ivec2 bearing; // Offset from baseline to left/top of glyph
+    unsigned int advance; // Horizontal offset to advance to next glyph
 };
 
 class Character {
@@ -104,10 +104,14 @@ public:
         FT_Done_FreeType(ft);
     }
 
-    void renderText(Shader &shader, std::string text, float x, float y, float scale, glm::vec3 color) {
+    ~Character() {
+        delete m_shader;
+    }
+
+    void renderText(std::string text, float x, float y, float scale, glm::vec3 color) {
         // activate corresponding render state	
-        shader.use();
-        glUniform3f(glGetUniformLocation(shader.getID(), "textColor"), color.x, color.y, color.z);
+        m_shader->use();
+        glUniform3f(glGetUniformLocation(m_shader->getID(), "textColor"), color.x, color.y, color.z);
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(m_VAO);
 

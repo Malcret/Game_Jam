@@ -3,10 +3,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "character.hpp"
+
 // OpenGL context options
 #define ANTIALIASING 4
-#define OPENGL_MAJOR 4
-#define OPENGL_MINOR 6
+#define OPENGL_MAJOR 3
+#define OPENGL_MINOR 3
 
 // Window options
 #define WINDOW_WIDTH 800
@@ -39,7 +41,7 @@ int main(int argc, const char **argv) {
 
     // Create a GLFW window
     GLFWwindow *window = NULL;
-    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "GameJam", NULL, NULL);
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "The lost pixel", NULL, NULL);
     if (window == NULL) {
         exit_error("Failed to create an OpenGL window", NULL, true);
     }
@@ -78,10 +80,13 @@ int main(int argc, const char **argv) {
         glfwPollEvents();
 
         // Draw
+        
 
         // Swap buffers
         glfwSwapBuffers(window);
     }
+
+    delete character;
 
     // Clear context
     glfwDestroyWindow(window);
