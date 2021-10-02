@@ -8,12 +8,11 @@
 class Sound
 {
 private:
-    irrklang::ISoundEngine* eventsEngine;
-    irrklang::ISoundEngine* trackEngine;
+    irrklang::ISoundEngine* engine;
     std::map<const char*, irrklang::ISound*> tracksSounds;
 public:
     Sound(std::vector<const char*> tracks, std::vector<const char*> events);
-    //~Sound();
+    ~Sound();
     void playEvent(const char* eventFilename);
     void pauseTrack(const char* trackFilename);
     void playTrack(const char* trackFilename, double volume = 1);

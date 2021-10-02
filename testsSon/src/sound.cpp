@@ -1,24 +1,20 @@
 #include "sound.hpp"
 
 Sound::Sound(std::vector<const char*> tracks, std::vector<const char*> events) {
-    eventsEngine = irrklang::createIrrKlangDevice();
-    if (!eventsEngine) {
+    engine = irrklang::createIrrKlangDevice();
+    if (!engine) {
         throw "Erreur: impossible d'initaliser IrrKlang";
     }
-    for (int i{0}; i<events.size(); i++) { eventsEngine->addSoundSourceFromFile(events[i]);}
-    trackEngine = irrklang::createIrrKlangDevice();
-    if (!trackEngine) {
-        throw "Erreur: impossible d'initaliser IrrKlang";
-    }
+    for (int i{0}; i<events.size(); i++) { engine->addSoundSourceFromFile(events[i]);}
     for (int i{0}; i<tracks.size(); i++) {
-        trackEngine->addSoundSourceFromFile(tracks[i]);
-        tracksSounds[tracks[i]] = trackEngine->play2D(trackEngine->getSoundSource(tracks[i]), false, true, true);
+        engine->addSoundSourceFromFile(tracks[i]);
+        tracksSounds[tracks[i]] = engine->play2D(engine->getSoundSource(tracks[i]), false, true, true);
         tracksSounds[tracks[i]]->setIsPaused(true);
     }
 }
 
 void Sound::playEvent(const char* eventFilename) {
-    eventsEngine->play2D(eventsEngine->getSoundSource(eventFilename), false, true);
+    engine->play2D(engine->getSoundSource(eventFilename), false);
 }
 
 void Sound::playTrack(const char* trackFilename, double volume) {
@@ -39,7 +35,7 @@ void Sound::setTrackMaster(const char* trackFilename, double volume) {
 }
 
 bool Sound::freeze(const char* trackFilename, const double pauseTime) {
-    if (time <= 0) { return false; }
+    if (pauseTime <= 0) { return false; }
     std::time_t start = std::time(nullptr);
     pauseTrack(trackFilename);
     while (std::time(nullptr)-start < pauseTime) { continue; }
@@ -51,11 +47,9 @@ void Sound::rollback(const char* trackFilename, const double rbTime) {
     tracksSounds[trackFilename]->setPlayPosition(tracksSounds[trackFilename]->getPlayPosition()-rbTime);
 }
 
-/*Sound::~Sound() {
-    eventsEngine->drop();
-    trackEngine->drop();
+Sound::~Sound() {
+    engine->drop();
     for (std::map<const char*, irrklang::ISound*>::iterator iter = tracksSounds.begin(); iter != tracksSounds.end(); iter++) {
         delete iter->second;
-        delete iter->first;
     }
-}*/
+}
