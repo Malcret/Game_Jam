@@ -7,7 +7,7 @@ int main() {
   std::vector<const char*> events;
   std::vector<const char*> track;
   track.push_back("son.mp3");
-  //track.push_back("son2.mp3");
+  track.push_back("son2.mp3");
   events.push_back("son3.mp3");
   Sound son(track, events);
   son.playTrack("son.mp3");
