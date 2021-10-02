@@ -3,6 +3,8 @@
 Game::Game(GLFWwindow *window, unsigned int screen_width, unsigned int screen_height)
     : m_window(window), m_screen_width(screen_width), m_screen_height(screen_height) {
 
+    m_game_state = Game_State::MAIN_MENU;
+    init_main_menu();
 }
 
 Game::~Game() {
@@ -26,5 +28,9 @@ void Game::delete_texture(const char *name) {
 }
 
 void Game::init_main_menu() {
-    
+    init_texture("title", "textures/Title.png", true);
+}
+
+void Game::loop() {
+
 }

@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "character.hpp"
+#include "game.hpp"
 
 // OpenGL context options
 #define ANTIALIASING 4
@@ -70,6 +70,8 @@ int main(int argc, const char **argv) {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    Game *m_game = new Game(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+
     // Render loop
     while (!glfwWindowShouldClose(window)) {
         // Clear screen
@@ -80,13 +82,13 @@ int main(int argc, const char **argv) {
         glfwPollEvents();
 
         // Draw
-        
+                
 
         // Swap buffers
         glfwSwapBuffers(window);
     }
 
-    delete character;
+    delete game;
 
     // Clear context
     glfwDestroyWindow(window);

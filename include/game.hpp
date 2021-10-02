@@ -4,6 +4,7 @@
 #include <iostream>
 #include <unordered_map>
 
+#include <GL/gl.h>
 #include <GLFW/glfw3.h>
 
 #include "settings.hpp"
@@ -11,6 +12,12 @@
 #include "texture.hpp"
 #include "player.hpp"
 #include "level.hpp"
+
+enum class Game_State {
+    MAIN_MENU,
+    GAME,
+    PAUSE
+};
 
 class Game {
 
@@ -20,6 +27,8 @@ public:
     
     ~Game();
 
+    void loop();
+
 private:
 
     GLFWwindow *m_window;
@@ -28,6 +37,8 @@ private:
     unsigned int m_screen_height;
 
     std::unordered_map<const char *, Texture *> m_texture_map;
+
+    Game_State m_game_state;
 
     Level *m_current_level;
     Player *m_player;
