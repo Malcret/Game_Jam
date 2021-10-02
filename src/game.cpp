@@ -4,6 +4,7 @@ Game::Game(GLFWwindow *window, unsigned int screen_width, unsigned int screen_he
     : m_window(window), m_screen_width(screen_width), m_screen_height(screen_height) {
 
     m_game_state = Game_State::MAIN_MENU;
+    m_shader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
     init_main_menu();
 }
 
@@ -12,6 +13,8 @@ Game::~Game() {
     for (auto it = m_texture_map.begin(); it != m_texture_map.end(); ++it) {
         delete_texture(it->first);
     }
+
+    delete m_background_sprite;
 }
 
 void Game::init_texture(const char *name, const char *path, bool alpha) {
@@ -28,9 +31,11 @@ void Game::delete_texture(const char *name) {
 }
 
 void Game::init_main_menu() {
-    init_texture("title", "textures/Title.png", true);
+
+    m_background_sprite = new Sprite(m_shader, "textures/Title.png");
 }
 
 void Game::loop() {
-
+    
+    m_background_sprite->draw();
 }

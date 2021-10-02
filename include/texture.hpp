@@ -5,9 +5,6 @@
 
 #include <GL/glew.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb/stb_image.h"
-
 class Texture {
 
 public:

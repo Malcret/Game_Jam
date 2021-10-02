@@ -82,13 +82,13 @@ int main(int argc, const char **argv) {
         glfwPollEvents();
 
         // Draw
-                
+        m_game->loop(); 
 
         // Swap buffers
         glfwSwapBuffers(window);
     }
 
-    delete game;
+    delete m_game;
 
     // Clear context
     glfwDestroyWindow(window);

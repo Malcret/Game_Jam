@@ -4,12 +4,10 @@
 #include <iostream>
 #include <unordered_map>
 
-#include <GL/gl.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include "settings.hpp"
-#include "shader.hpp"
-#include "texture.hpp"
 #include "player.hpp"
 #include "level.hpp"
 
@@ -42,6 +40,9 @@ private:
 
     Level *m_current_level;
     Player *m_player;
+
+    Shader *m_shader;
+    Sprite *m_background_sprite;
 
     void init_texture(const char *name, const char *path, bool alpha = false);
     void delete_texture(const char *name);

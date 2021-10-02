@@ -1,5 +1,8 @@
 #include "texture.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+
 Texture::Texture(const char *path, bool alpha) {        
 
     int width, height, nrChannels;
@@ -36,10 +39,12 @@ Texture::Texture(const char *path, bool alpha) {
 
 // Return texture ID
 const unsigned int &Texture::getID() {
+    
     return m_ID;
 }
 
 // Activate Texture
 void Texture::use() {
+
     glBindTexture(GL_TEXTURE_2D, m_ID);
 }

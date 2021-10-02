@@ -41,7 +41,7 @@ run:
 	./$(PROG)
 
 clean:
-	rm -Rf bin/$(OS)/$(BUILD_MOD)/*.o
+	rm -Rf bin/$(OS)/$(BUILD_MOD)/obj/*.o
 	rm -Rf $(PROG)
 
 mrproper:

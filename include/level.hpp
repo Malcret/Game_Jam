@@ -3,8 +3,6 @@
 
 #include <vector>
 
-#include "shader.hpp"
-#include "texture.hpp"
 #include "sprite.hpp"
 
 class Level {
