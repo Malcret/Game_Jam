@@ -2,6 +2,7 @@
 #define SETTINGS_HPP
 
 #include <yaml-cpp/yaml.h>
+#include <fstream>
 
 typedef struct {
     unsigned int window_width;
@@ -10,5 +11,6 @@ typedef struct {
 } settings;
 
 settings loadSettings();
+void saveSettings(settings sets);
 
 #endif // SETTINGS_HPP
