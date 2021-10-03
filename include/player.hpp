@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#define PLAYER_VELOCITY 10
+
 class Player {
 
 public:
