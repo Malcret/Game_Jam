@@ -4,10 +4,12 @@
 #include <yaml-cpp/yaml.h>
 #include <fstream>
 
-typedef struct Settings {
+typedef struct Settings{
     unsigned int window_width;
     unsigned int window_height;
     unsigned int antialiasing;
+    int eventMaster;
+    int musicMaster;
 };
 
 Settings loadSettings();
