@@ -3,8 +3,6 @@
 Game::Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int screen_height, std::vector< const char*> tracks, std::vector< const char*> events) : m_window(window), m_screen_width(screen_width), m_screen_height(screen_height), sound(Sound(tracks, events)){
 
     m_level = NULL;
-    std::time_t start = std::time(nullptr);
-    while (std::time(nullptr)-start < 10) { continue; }
     load_textures();
     load_main_menu();
 }
@@ -51,7 +49,7 @@ void Game::loop() {
 
     m_level->draw(m_delta_time);
 
-    sound.playTrack("sounds/LVL1_KALM.wav");
+    sound.playTrack("sounds/TITLE_THEME.wav");
 }
 
 void Game::get_keyboard_input() {

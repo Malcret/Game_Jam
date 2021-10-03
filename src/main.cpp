@@ -14,6 +14,10 @@ int main() {
     tracks.push_back("sounds/LVL1_KALM.wav");
     tracks.push_back("sounds/LVL1_NOICE.wav");
     tracks.push_back("sounds/LVL1_PANIK.wav");
+    tracks.push_back("sounds/LVL2_KALM.wav");
+    tracks.push_back("sounds/LVL2_NOICE.wav");
+    tracks.push_back("sounds/LVL2_PANIK.wav");
+    tracks.push_back("sounds/TITLE_THEME.wav");
     Game *m_game = new Game(window, WINDOW_WIDTH, WINDOW_HEIGHT, tracks, events);
 
     while (window.isOpen()) {
