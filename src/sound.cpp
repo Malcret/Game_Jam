@@ -1,6 +1,6 @@
 #include "sound.hpp"
 
-Sound::Sound(std::vector<const char*> tracks, std::vector<const char*> events) {
+Sound::Sound(std::vector<const char*> tracks, std::vector<const char*> events) : musicMaster(1), eventMaster(1) {
     engine = irrklang::createIrrKlangDevice();
     if (!engine) {
         throw "Erreur: impossible d'initaliser IrrKlang";
@@ -14,13 +14,20 @@ Sound::Sound(std::vector<const char*> tracks, std::vector<const char*> events) {
     }
 }
 
-void Sound::playEvent(const char* eventFilename) {
-    engine->play2D(engine->getSoundSource(eventFilename), false);
+void Sound::playEvent(const char* eventFilename, double volume) {
+    if (volume > 1) {volume = 1;}
+    if (volume < 0 and volume != -1) {volume = 0;}
+    if (volume == -1) { volume = eventMaster; }
+    irrklang::ISound* temp = engine->play2D(engine->getSoundSource(eventFilename), false, true, true);
+    temp->setVolume(volume);
+    temp->setIsPaused(false);
 }
 
 void Sound::playTrack(const char* trackFilename, double volume) {
     if (tracksSounds[trackFilename]->getIsPaused()) {
-        if (volume > 1 or volume < 0) {volume = 1;}
+        if (volume > 1) {volume = 1;}
+        if (volume < 0 and volume != -1) {volume = 0;}
+        if (volume == -1) { volume = musicMaster; }
         tracksSounds[trackFilename]->setVolume(volume);
         tracksSounds[trackFilename]->setIsPaused(false);
     }
@@ -32,8 +39,17 @@ void Sound::pauseTrack(const char* trackFilename) {
 
 void Sound::setTrackMaster(const char* trackFilename, double volume) {
     if (volume > 1) {volume = 1;}
-    if (volume < 0) {volume = 0;}
+    if (volume < 0 and volume != -1) {volume = 0;}
+    if (volume == -1) { volume = musicMaster; }
     tracksSounds[trackFilename]->setVolume(volume);
+}
+
+void Sound::setMusicMaster(double volume) {
+    if (volume >= 0 and volume <=1) {musicMaster = volume;}
+}
+
+void Sound::setEventMaster(double volume) {
+    if (volume >= 0 and volume <=1) {eventMaster = volume;}
 }
 
 bool Sound::freeze(const char* trackFilename, const double pauseTime) {
@@ -74,3 +90,7 @@ Sound::~Sound() {
         delete iter->second;
     }
 }
+
+int Sound::getMusicMaster() { return musicMaster; }
+
+int Sound::getEventMaster() { return eventMaster; }
