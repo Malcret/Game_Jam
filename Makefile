@@ -7,7 +7,7 @@ INC_DIR = -I./include
 LIB_DIR = -L./lib
 
 ifeq ($(OS), linux)
-LIB_FILES =-lGLEW -lGL -lglfw3 -lglm_static -lfreetype -lX11 -lXxf86vm -lXrandr -pthread -lXi -ldl
+LIB_FILES = -lsfml-graphics -lsfml-window -lsfml-system
 else ifeq ($(OS), win32)
 LIB_FILES =
 else

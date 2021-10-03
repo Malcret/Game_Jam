@@ -3,8 +3,6 @@
 
 #include <vector>
 
-#include "sprite.hpp"
-
 class Level {
 
 public:
@@ -15,8 +13,6 @@ public:
 
 private:
 
-    Texture *m_background_texture;
-    std::vector<Texture *> m_foreground_textures_map;
 };
 
 #endif // LEVEL_HPP
