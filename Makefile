@@ -7,7 +7,7 @@ INC_DIR = -I./include
 LIB_DIR = -L./lib
 
 ifeq ($(OS), linux)
-LIB_FILES =-lGLEW -lGL -lglfw3 -lglm_static -lfreetype -lX11 -lXxf86vm -lXrandr -pthread -lXi -ldl
+LIB_FILES = -lIrrKlang -pthread -lsfml-graphics -lsfml-window -lsfml-system
 else ifeq ($(OS), win32)
 LIB_FILES =
 else
@@ -15,7 +15,7 @@ else
 endif
 
 ifeq ($(BUILD_MOD), debug)
-CXX_FLAGS = -std=$(CXX_VERSION) -g -Og -Wall
+CXX_FLAGS = -std=$(CXX_VERSION) -g -Og
 else ifeq ($(BUILD_MOD), release)
 CXX_FLAGS = -std=$(CXX_VERSION) -O2 -DNDEBUG
 else
@@ -38,7 +38,7 @@ $(PROG): $(OBJ_FILES)
 build: $(PROG)
 
 run:
-	./$(PROG)
+	LD_LIBRARY_PATH=./lib/ ./$(PROG)
 
 clean:
 	rm -Rf bin/$(OS)/$(BUILD_MOD)/obj/*.o
