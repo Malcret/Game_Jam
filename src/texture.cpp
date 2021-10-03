@@ -46,5 +46,6 @@ const unsigned int &Texture::getID() {
 // Activate Texture
 void Texture::use() {
 
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_ID);
 }

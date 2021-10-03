@@ -94,6 +94,12 @@ void Shader::setVec4(const char *name, const float x, const float y, const float
 void Shader::setMat2(const char *name, glm::mat2 matrix) const {
     glUniformMatrix2fv(glGetUniformLocation(m_ID, name), 1, GL_FALSE, &matrix[0][0]);
 }
+void Shader::setMat3(const char *name, glm::mat3 matrix) const {
+    glUniformMatrix3fv(glGetUniformLocation(m_ID, name), 1, GL_FALSE, &matrix[0][0]);
+}
+void Shader::setMat4(const char *name, glm::mat4 matrix) const {
+    glUniformMatrix4fv(glGetUniformLocation(m_ID, name), 1, GL_FALSE, &matrix[0][0]);
+}
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type) {
     int success;

@@ -7,6 +7,10 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "settings.hpp"
 #include "player.hpp"
 #include "level.hpp"
@@ -31,10 +35,7 @@ private:
 
     GLFWwindow *m_window;
 
-    unsigned int m_screen_width;
-    unsigned int m_screen_height;
-
-    std::unordered_map<const char *, Texture *> m_texture_map;
+    unsigned int m_screen_width, m_screen_height;
 
     Game_State m_game_state;
 
@@ -42,10 +43,8 @@ private:
     Player *m_player;
 
     Shader *m_shader;
-    Sprite *m_background_sprite;
-
-    void init_texture(const char *name, const char *path, bool alpha = false);
-    void delete_texture(const char *name);
+    Texture *m_texture;
+    unsigned int m_VAO, m_VBO, m_EBO;
 
     void init_main_menu();
 

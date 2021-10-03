@@ -78,14 +78,12 @@ int main(int argc, const char **argv) {
         glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Get events
-        glfwPollEvents();
-
         // Draw
         m_game->loop(); 
 
         // Swap buffers
         glfwSwapBuffers(window);
+        glfwPollEvents();
     }
 
     delete m_game;

@@ -33,6 +33,8 @@ public:
     void setVec4(const char *name, glm::vec4 vector) const;
     void setVec4(const char *name, const float x, const float y, const float z, const float w) const;
     void setMat2(const char *name, glm::mat2 matrix) const;
+    void setMat3(const char *name, glm::mat3 matrix) const;
+    void setMat4(const char *name, glm::mat4 matrix) const;
 
 private:
 

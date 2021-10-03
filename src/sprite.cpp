@@ -39,6 +39,9 @@ Sprite::Sprite(Shader *shader, const char *path, glm::vec2 pos)
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
+    m_shader->use();
+    m_shader->setInt("texture1", 0);
+
 }
 
 Sprite::~Sprite() {
@@ -54,9 +57,8 @@ Sprite::~Sprite() {
 
 void Sprite::draw() {
 
-    m_texture->use();
-
     m_shader->use();
+    m_texture->use();
 
     glBindVertexArray(m_VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
