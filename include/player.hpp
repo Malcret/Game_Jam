@@ -1,7 +1,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include <glm/glm.hpp>
+#include <SFML/Graphics.hpp>
 
 class Player {
 
@@ -11,8 +11,8 @@ public:
 
     ~Player();
 
-    void set_pos(glm::vec2 pos);
-    void move(glm::vec2 pos) {
+    void set_pos(sf::Vector2f pos);
+    void move(sf::Vector2f pos) {
         m_pos += pos;
     }
 
@@ -23,7 +23,7 @@ private:
     unsigned int m_madness;
     unsigned int m_default_health;
     unsigned int m_health;
-    glm::vec2 m_pos;
+    sf::Vector2f m_pos;
 
 };
 

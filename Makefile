@@ -15,7 +15,7 @@ else
 endif
 
 ifeq ($(BUILD_MOD), debug)
-CXX_FLAGS = -std=$(CXX_VERSION) -g -Og -Wall
+CXX_FLAGS = -std=$(CXX_VERSION) -g -Og
 else ifeq ($(BUILD_MOD), release)
 CXX_FLAGS = -std=$(CXX_VERSION) -O2 -DNDEBUG
 else
