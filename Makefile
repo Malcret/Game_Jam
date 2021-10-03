@@ -7,7 +7,7 @@ INC_DIR = -I./include
 LIB_DIR = -L./lib
 
 ifeq ($(OS), linux)
-LIB_FILES = -lIrrKlang -pthread -lsfml-graphics -lsfml-window -lsfml-system
+LIB_FILES = -l "yaml-cpp" -lIrrKlang -pthread -lsfml-graphics -lsfml-window -lsfml-system
 else ifeq ($(OS), win32)
 LIB_FILES =
 else

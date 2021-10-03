@@ -8,7 +8,13 @@
 int main() {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "The lost pixel");
 
-    Game *m_game = new Game(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+    std::vector<const char*> events;
+    std::vector<const char*> tracks;
+    tracks.push_back("sounds/LVL1_KALM.wav");
+    tracks.push_back("sounds/LVL1_NOICE.wav");
+    tracks.push_back("sounds/LVL1_PANIK.wav");
+    Game *m_game = new Game(window, WINDOW_WIDTH, WINDOW_HEIGHT, tracks, events);
 
     while (window.isOpen()) {
         // Poll events

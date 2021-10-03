@@ -4,12 +4,14 @@
 #include <iostream>
 #include <unordered_map>
 #include <ctime>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 
 #include "settings.hpp"
 #include "player.hpp"
 #include "level.hpp"
+#include "sound.hpp"
 
 enum class Game_State {
     RUN,
@@ -29,7 +31,7 @@ class Game {
 
 public:
 
-    Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int screen_height);
+    Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int screen_height, std::vector< const char*> tracks, std::vector< const char*> events);
     
     ~Game();
 
@@ -52,6 +54,8 @@ private:
 
     Level *m_level;
     Player *m_player;
+
+    Sound sound;
 
     void load_textures();
     void load_main_menu();
