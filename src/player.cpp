@@ -12,7 +12,7 @@ Player::~Player() {
 void Player::initStats() {
     m_madness = m_default_madness;
     m_health = m_default_health;
-    set_pos(glm::vec2(0,0));
+    set_pos(sf::Vector2f(0,0));
 }
 
 void Player::save() {
@@ -37,6 +37,6 @@ void Player::initFromSave() {
     m_name = saveFile["playerName"].as<std::string>().c_str();
 }
 
-void Player::set_pos(glm::vec2 pos) {
+void Player::set_pos(sf::Vector2f pos) {
     m_pos = pos;
 }
