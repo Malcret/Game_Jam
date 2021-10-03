@@ -31,7 +31,7 @@ class Game {
 
 public:
 
-    Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int screen_height, std::vector< const char*> tracks, std::vector< const char*> events);
+    Game(sf::RenderWindow &window, Settings &m_settings, std::vector< const char*> tracks, std::vector< const char*> events);
     
     ~Game();
 
@@ -39,8 +39,8 @@ public:
 
 private:
 
+    Settings &m_settings;
     sf::RenderWindow &m_window;
-    unsigned int m_screen_width, m_screen_height;
 
     Game_State m_game_state;
     Game_Level m_game_level;
@@ -57,6 +57,7 @@ private:
 
     Sound sound;
 
+    void add_texture(const char *name, const char *path);
     void load_textures();
     void load_main_menu();
     void load_level(unsigned int nb);

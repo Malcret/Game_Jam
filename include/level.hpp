@@ -5,17 +5,22 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "settings.hpp"
+
 class Level {
 
 public:
 
-    Level(sf::RenderWindow &window, std::unordered_map<const char *, sf::Texture *> textures_map, unsigned int nb);
+    Level(sf::RenderWindow &window, Settings &settings, std::unordered_map<const char *, sf::Texture *> &textures_map, unsigned int nb);
     ~Level();
 
     void draw(const float delta_time);
 
+    void move_selector();
+
 private:
 
+    Settings &m_settings;
     sf::RenderWindow &m_window;
 
     std::unordered_map<const char *, sf::Texture *> &m_textures_map;

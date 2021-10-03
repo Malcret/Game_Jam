@@ -1,7 +1,7 @@
 #include "level.hpp"
 
-Level::Level(sf::RenderWindow &window, std::unordered_map<const char *, sf::Texture *> textures_map, unsigned int nb)
-    : m_window(window), m_textures_map(textures_map) {
+Level::Level(sf::RenderWindow &window, Settings &settings, std::unordered_map<const char *, sf::Texture *> &textures_map, unsigned int nb)
+    : m_window(window), m_settings(settings), m_textures_map(textures_map) {
     
     switch (nb) {
     case 0:
@@ -26,11 +26,6 @@ Level::Level(sf::RenderWindow &window, std::unordered_map<const char *, sf::Text
 }
 
 Level::~Level() {
-    for (auto it = m_textures_map.begin(); it != m_textures_map.end(); ++it) {
-        if (it->second != NULL) {
-            delete it->second;
-        }
-    }
 
     for (int i = 0; i < m_sprites_vector.size(); ++i) {
         delete m_sprites_vector[i];
@@ -43,10 +38,17 @@ void Level::draw(const float delta_time) {
     }
 }
 
+void Level::move_selector() {
+
+}
+
 void Level::load_level_0() {
+    
+    sf::Vector2f mul = sf::Vector2f((float)m_window.getSize().x / (float)m_textures_map["main_menu_background"]->getSize().x, (float)m_window.getSize().y / (float)m_textures_map["main_menu_background"]->getSize().y);
+
     m_sprites_vector.push_back(new sf::Sprite());
     m_sprites_vector[0]->setTexture(*m_textures_map["main_menu_background"]);
-    m_sprites_vector[0]->setScale(800.0f / m_textures_map["main_menu_background"]->getSize().x, 600.0f / m_textures_map["main_menu_background"]->getSize().y);
+    m_sprites_vector[0]->setScale(mul);
 }
 void Level::load_level_1() {
 

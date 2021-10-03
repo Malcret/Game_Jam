@@ -1,6 +1,7 @@
 #include "game.hpp"
 
-Game::Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int screen_height, std::vector< const char*> tracks, std::vector< const char*> events) : m_window(window), m_screen_width(screen_width), m_screen_height(screen_height), sound(Sound(tracks, events)){
+Game::Game(sf::RenderWindow &window, Settings &settings, std::vector< const char*> tracks, std::vector< const char*> events) 
+    : m_window(window), m_settings(settings), sound(Sound(tracks, events)){
 
     m_level = NULL;
     load_textures();
@@ -9,14 +10,23 @@ Game::Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int scr
 
 Game::~Game() {
 
+    for (auto it = m_textures_map.begin(); it != m_textures_map.end(); ++it) {
+        if (it->second != NULL) {
+            delete it->second;
+        }
+    }
+}
+
+void Game::add_texture(const char *name, const char *path) {
+    m_textures_map[name] = new sf::Texture();
+    if (!m_textures_map[name]->loadFromFile(path)) {
+        std::cerr << "ERROR: Failed to load texture : " << path << std::endl;
+    }
 }
 
 void Game::load_textures() {
-
-    m_textures_map["main_menu_background"] = new sf::Texture();
-    if (!m_textures_map["main_menu_background"]->loadFromFile("textures/Title.png")) {
-        std::cerr << "failed to load texture : textures/Title.png" << std::endl;
-    }
+    add_texture("main_menu_background", "textures/Title_without_boxes.png");
+    add_texture("selector", "textures/selector.png");
 }
 
 void Game::load_main_menu() {
@@ -33,7 +43,7 @@ void Game::load_level(unsigned int nb) {
         m_level = NULL;
     }
 
-    m_level = new Level(m_window, m_textures_map, nb);
+    m_level = new Level(m_window, m_settings, m_textures_map, nb);
     m_game_level = (Game_Level)nb;
 }
 
@@ -41,7 +51,6 @@ void Game::loop() {
     m_current_frame = m_clock.getElapsedTime().asSeconds();
     m_delta_time = m_current_frame - m_last_frame;
     m_last_frame = m_current_frame;
-    std::cout << m_delta_time << std::endl;
 
     get_keyboard_input();
     get_mouse_input();
@@ -49,7 +58,9 @@ void Game::loop() {
 
     m_level->draw(m_delta_time);
 
-    sound.playTrack("sounds/TITLE_THEME.wav");
+    if (m_game_level == Game_Level::MAIN_MENU) {
+        sound.playTrack("sounds/TITLE_THEME.wav");
+    }
 }
 
 void Game::get_keyboard_input() {
