@@ -2,10 +2,8 @@
 #define GAME_HPP
 
 #include <iostream>
-#include <unordered_map>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <SFML/Graphics.hpp>
 
 #include "settings.hpp"
 #include "player.hpp"
@@ -21,7 +19,7 @@ class Game {
 
 public:
 
-    Game(GLFWwindow *window, unsigned int screen_width, unsigned int screen_height);
+    Game(sf::RenderWindow &window, unsigned int screen_width, unsigned int screen_height);
     
     ~Game();
 
@@ -29,23 +27,13 @@ public:
 
 private:
 
-    GLFWwindow *m_window;
-
-    unsigned int m_screen_width;
-    unsigned int m_screen_height;
-
-    std::unordered_map<const char *, Texture *> m_texture_map;
+    sf::RenderWindow &m_window;
+    unsigned int m_screen_width, m_screen_height;
 
     Game_State m_game_state;
 
-    Level *m_current_level;
-    Player *m_player;
-
-    Shader *m_shader;
-    Sprite *m_background_sprite;
-
-    void init_texture(const char *name, const char *path, bool alpha = false);
-    void delete_texture(const char *name);
+    sf::Texture m_background_texture;
+    sf::Sprite m_background_sprite;
 
     void init_main_menu();
 
