@@ -8,7 +8,7 @@ Sound::Sound(std::vector<const char*> tracks, std::vector<const char*> events) {
     for (int i{0}; i<events.size(); i++) { engine->addSoundSourceFromFile(events[i]);}
     for (int i{0}; i<tracks.size(); i++) {
         engine->addSoundSourceFromFile(tracks[i]);
-        tracksSounds[tracks[i]] = engine->play2D(engine->getSoundSource(tracks[i]), false, true, true);
+        tracksSounds[tracks[i]] = engine->play2D(engine->getSoundSource(tracks[i]), true, true, true);
         tracksSounds[tracks[i]]->setIsPaused(true);
     }
 }
